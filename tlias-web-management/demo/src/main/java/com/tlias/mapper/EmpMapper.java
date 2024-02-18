@@ -1,6 +1,7 @@
 package com.tlias.mapper;
 
 import com.tlias.pojo.Emp;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -44,6 +45,11 @@ public interface EmpMapper {
             " values (#{username},#{name},#{gender},#{image},#{job},#{entrydate},#{deptId},#{createTime},#{updateTime})")
     void insert(Emp emp);
 
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
     @Select("select * from emp where id = #{id}")
     Emp getById(Integer id);
 
@@ -53,6 +59,18 @@ public interface EmpMapper {
      */
     void updateById(Emp emp);
 
+    /**
+     * 登录username，password效验
+     * @param emp
+     * @return
+     */
     @Select("select * from emp where username = #{username} and password = #{password}")
     Emp getByUsernameAndPassword(Emp emp);
+
+    /**
+     * 根据部门ID删除部门
+     * @param deptId
+     */
+    @Delete("delete  from emp where dept_id = #{deptId}")
+    void deleteByDeptId(Integer deptId);
 }

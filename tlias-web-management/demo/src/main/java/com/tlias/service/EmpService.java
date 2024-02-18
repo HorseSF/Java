@@ -41,4 +41,6 @@ public interface EmpService {
      * @return
      */
     Emp login(Emp emp);
+
+    void deleteByDeptId(Integer id);
 }

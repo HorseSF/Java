@@ -9,6 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.UUID;
 
+/**
+ * 文件上传
+ */
 @Slf4j
 @RestController
 public class UpdateController {

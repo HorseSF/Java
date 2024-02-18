@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 登录Controller
+ */
 @Slf4j
 @RestController
 public class LoginController {
@@ -25,7 +28,7 @@ public class LoginController {
         log.info("员工登陆: {}", emp);
         Emp e = empService.login(emp);
 
-        // 登录成功，生成令牌，下发令牌
+        // 登录成功，生成令牌，下发jwt令牌
         if (e != null) {
             Map<String, Object> claims = new HashMap<>();
             claims.put("id", e.getId());

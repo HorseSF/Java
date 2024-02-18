@@ -1,5 +1,6 @@
 package com.tlias.controller;
 
+import com.tlias.anno.Log;
 import com.tlias.pojo.Emp;
 import com.tlias.pojo.PageBean;
 import com.tlias.pojo.Result;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * 部门管理Controller
+ * 员工管理Controller
  */
 @Slf4j
 @RestController
@@ -24,6 +25,16 @@ public class EmpController {
     @Autowired
     private EmpService empService;
 
+    /**
+     * 分页查询
+     * @param page
+     * @param pageSize
+     * @param name
+     * @param gender
+     * @param begin
+     * @param end
+     * @return
+     */
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize,
@@ -36,6 +47,12 @@ public class EmpController {
         return Result.success(pageBean);
     }
 
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    @Log
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("批量删除， ids：{}", ids);
@@ -43,6 +60,12 @@ public class EmpController {
         return Result.success();
     }
 
+    /**
+     * 新增员工
+     * @param emp
+     * @return
+     */
+    @Log
     @PostMapping
     public Result save(@RequestBody Emp emp) {
         log.info("新增员工, emp:{}", emp);
@@ -50,6 +73,11 @@ public class EmpController {
         return Result.success();
     }
 
+    /**
+     * 根据ID查询员工
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id) {
         log.info("根据id查询, id:{}", id);
@@ -57,6 +85,12 @@ public class EmpController {
         return Result.success(emp);
     }
 
+    /**
+     * 修改员工
+     * @param emp
+     * @return
+     */
+    @Log
     @PutMapping
     public Result updateById(@RequestBody Emp emp) {
         log.info("修改员工, emp:{}", emp);
