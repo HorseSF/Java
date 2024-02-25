@@ -1,6 +1,7 @@
 package com.itheima.reggie_take_out.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.itheima.reggie_take_out.common.BaseContext;
 import com.itheima.reggie_take_out.common.R;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -26,6 +27,9 @@ public class LoginCheckFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse rep = (HttpServletResponse) response;
 
+        long threadId = Thread.currentThread().getId();
+        log.info("线程id: {}", threadId );
+
         // 1.获取本次请求的URI
         String requestURI = req.getRequestURI();
 
@@ -48,6 +52,10 @@ public class LoginCheckFilter implements Filter {
 
         // 4.判断登录状态，如果已登录，则直接放行
         if (req.getSession().getAttribute("employee") != null) {
+
+            Long empId = (Long) req.getSession().getAttribute("employee");
+            BaseContext.setCurrentId(empId);
+
             chain.doFilter(req, rep);
             return;
         }

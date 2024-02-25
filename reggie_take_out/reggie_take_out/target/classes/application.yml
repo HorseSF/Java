@@ -18,3 +18,6 @@ mybatis-plus:
     db-config:
       id-type: ASSIGN_ID
   mapper-location: classpath:mybatis/mapper/*.xml
+
+reggie:
+  path: /Users/maxiaofei/work/Java/reggie_take_out/reggie_take_out/upload/
